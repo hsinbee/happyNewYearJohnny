@@ -1,10 +1,365 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Happy New Year</title>
-</head>
-<body>
-    
-</body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="index.css" />
+		<title>HNY_BB_Johnny</title>
+	</head>
+	<body>
+		<ul class="light-rope">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+
+		<div class="header">
+			<h1>
+				<div class="newYear">Johnny New Year</div>
+				<div class="word title">
+					<span>蛇</span>
+					<span>巴</span>
+					<span>拉</span>
+					<span>系</span>
+				</div>
+				<br />
+				<div class="word title">
+					<span>恭</span>
+					<span>喜</span>
+					<span>發</span>
+					<span>財</span>
+					<span>紅</span>
+					<span>包</span>
+					<span>來</span>
+					<span>拿</span>
+				</div>
+			</h1>
+		</div>
+
+		<div class="mailbox">
+			<div class="basis"></div>
+			<div class="box">
+				<div class="letters">
+					<div class="letter letter-second">
+						<img class="letter-image" src="https://img.freepik.com/premium-vector/christmas-mail-postcard-hand-drawn-illustration_514781-2114.jpg" />
+					</div>
+					<div class="letter letter-first">
+						<img class="letter-image" src="https://www.shutterstock.com/image-vector/christmas-new-year-postcard-wish-260nw-761840683.jpg" />
+					</div>
+				</div>
+				<div class="slogan-box">
+					<div class="slogan-title">🎉 刮刮樂來啦！</div>
+					<div class="slogan-text">
+						「這是一場<br />不流血的戰爭，刮！」 🤣
+						<span class="star">★</span>
+						<span class="star">★</span>
+						<span class="star">★</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 雪景 -->
+		<div class="winter-wrapper" id="winter-wrapper"></div>
+		<!-- 雪地 -->
+		<div class="ground"></div>
+
+		<dialog class="mail" id="mail">
+			<div class="mail-inner">
+				<button class="mail-close" autofocus id="mailClose">X</button>
+				<div class="cards-container">
+					<div class="card">
+						<div class="card-inner">
+							<div class="card-front">🎉 刮刮樂 1</div>
+							<div class="card-back">
+								<canvas class="scratch-layer"></canvas>
+								<div class="scratch-text">💰 恭喜發財</div>
+							</div>
+						</div>
+					</div>
+					<div class="card" >
+						<div class="card-inner">
+							<div class="card-front">🎉 刮刮樂 2</div>
+							<div class="card-back">
+								<canvas class="scratch-layer"></canvas>
+								<div class="scratch-text">🎁 大吉大利</div>
+							</div>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-inner">
+							<div class="card-front">🎉 刮刮樂 3</div>
+							<div class="card-back">
+								<canvas class="scratch-layer"></canvas>
+								<div class="scratch-text">🏆 今年暴富</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</dialog>
+		<button class="mailbox-shadow" id="mailbox"></button>
+		<canvas id="scratchCanvas"></canvas>
+
+		<div><img src="./img/ginza.png" alt="" /></div>
+
+		<script>
+			// Snowfall Effect
+			(function () {
+				const winterWrapper = document.getElementById('winter-wrapper');
+
+				const createSnowflake = (count, className) => {
+					for (let i = 1; i <= count; i++) {
+						const snowflake = document.createElement('div');
+						snowflake.className = `snowflake ${className}-${i}`;
+
+						// 随机设置雪花大小
+						const size = Math.random() * 5 + 5; // 5px ~ 20px 之间
+						snowflake.style.width = `${size}px`;
+						snowflake.style.height = `${size}px`;
+
+						winterWrapper.appendChild(snowflake);
+					}
+				};
+
+				createSnowflake(250, '_sm');
+				createSnowflake(50, '_md');
+				createSnowflake(50, '_lg');
+			})();
+
+			// Fireworks Effect
+			(function () {
+				const startFireworks = (x, y) => {
+					const candyCount = 150; // 每次生成的 "煙火糖果" 數量
+					const colors = ['#ADD8E6', '#B2F2BB', '#FFFACD', '#FFE4E1', '#FFB6C1', '#D8BFD8'];
+					const candies = []; // 用來存儲生成的煙火糖果元素
+
+					for (let i = 0; i < candyCount; i++) {
+						const candy = document.createElement('div');
+						candy.classList.add('candy');
+
+						// 隨機選擇顏色
+						const randomColor = colors[Math.floor(Math.random() * colors.length)];
+						candy.style.background = randomColor;
+
+						// 設置大小
+						const size = Math.random() * 10 + 10; // 5px ~ 15px 隨機大小
+						candy.style.width = `${size}px`;
+						candy.style.height = `${size}px`;
+
+						// 設置隨機方向
+						const angle = Math.random() * 2 * Math.PI; // 隨機角度 (0 ~ 360度)
+						const distance = Math.random() * 700 + 50; // 隨機距離 (50px ~ 150px)
+						const xOffset = Math.cos(angle) * distance;
+						const yOffset = Math.sin(angle) * distance;
+
+						// 使用 CSS 變量設置動畫方向
+						candy.style.setProperty('--x', `${xOffset}px`);
+						candy.style.setProperty('--y', `${yOffset}px`);
+
+						// 設置初始位置
+						candy.style.left = `${x}px`;
+						candy.style.top = `${y}px`;
+
+						// 將糖果添加到頁面
+						document.body.appendChild(candy);
+						candies.push(candy);
+					}
+
+					// 移除動畫結束的糖果元素
+					setTimeout(() => {
+						candies.forEach((candy) => candy.remove());
+					}, 1250);
+				};
+
+				// 綁定點擊事件觸發煙火效果
+				const winterWrapper = document.getElementById('winter-wrapper');
+				winterWrapper.addEventListener('click', (event) => {
+					startFireworks(event.clientX, event.clientY);
+				});
+
+				// 自動隨機生成煙火
+				setInterval(() => {
+					const x = Math.random() * window.innerWidth;
+					const y = Math.random() * window.innerHeight * 0.6; // 僅限屏幕上半部分
+					startFireworks(x, y);
+				}, 2000);
+			})();
+		</script>
+
+		<script>
+			// 刮刮樂
+			// 取得信箱和刮刮樂容器的 DOM 元素
+			const mailbox = document.getElementById('mailbox');
+			const mailDialog = document.getElementById('mail');
+			const mailClose = document.getElementById('mailClose');
+			const cards = document.querySelectorAll('.card');
+			let selectedCard = null;
+
+			// 點擊郵筒打開郵件
+			mailbox.addEventListener('click', () => {
+				mailDialog.showModal();
+			});
+
+			// 點擊卡片，翻轉並啟動刮刮樂
+			cards.forEach((card) => {
+				card.addEventListener('click', () => {
+					if (selectedCard) return;
+
+					selectedCard = card;
+					card.classList.add('flipped', 'selected');
+
+					// 讓其他卡片變灰色不可點擊
+					cards.forEach((c) => {
+						if (c !== card) c.classList.add('background-card');
+					});
+
+					// 啟動刮刮樂
+					const canvas = card.querySelector('.scratch-layer');
+					if (!canvas.dataset.initialized) {
+						setupScratch(canvas);
+						canvas.dataset.initialized = 'true';
+					}
+				});
+			});
+
+			// 點擊關閉按鈕，恢復狀態
+			mailClose.addEventListener('click', () => {
+				mailDialog.close();
+
+				cards.forEach((card) => {
+					card.classList.remove('flipped', 'selected', 'background-card');
+				});
+
+				selectedCard = null;
+			});
+
+			// **刮刮樂功能**
+			function setupScratch(canvas) {
+				console.log('Initializing canvas:', canvas); // 測試是否進入這裡
+				const ctx = canvas.getContext('2d');
+				canvas.width = canvas.offsetWidth;
+				canvas.height = canvas.offsetHeight;
+
+				// 填充灰色遮罩
+				ctx.fillStyle = '#bfbfbf';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+				let isScratching = false;
+
+				function scratch(e) {
+					if (!isScratching) return;
+
+					const rect = canvas.getBoundingClientRect();
+					const x = (e.clientX || e.touches[0].clientX) - rect.left;
+					const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+					ctx.globalCompositeOperation = 'destination-out';
+					ctx.beginPath();
+					ctx.arc(x, y, 15, 0, Math.PI * 2);
+					ctx.fill();
+				}
+
+				// 綁定事件
+				canvas.addEventListener('mousedown', () => (isScratching = true));
+				canvas.addEventListener('mouseup', () => (isScratching = false));
+				canvas.addEventListener('mousemove', scratch);
+
+				canvas.addEventListener('touchstart', () => (isScratching = true));
+				canvas.addEventListener('touchend', () => (isScratching = false));
+				canvas.addEventListener('touchmove', (e) => {
+					e.preventDefault();
+					scratch(e);
+				});
+			}
+		</script>
+
+		<script>
+			const canvas = document.getElementById('scratchCanvas');
+			const ctx = canvas.getContext('2d');
+			let isDrawing = false;
+
+			function resizeCanvas() {
+				canvas.width = canvas.offsetWidth;
+				canvas.height = canvas.offsetHeight;
+				ctx.fillStyle = 'gray';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+			}
+
+			function startScratch(e) {
+				isDrawing = true;
+				scratch(e);
+			}
+
+			function stopScratch() {
+				isDrawing = false;
+				checkScratchCompletion();
+			}
+
+			function scratch(e) {
+				if (!isDrawing) return;
+				const rect = canvas.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				ctx.globalCompositeOperation = 'destination-out';
+				ctx.beginPath();
+				ctx.arc(x, y, 15, 0, Math.PI * 2);
+				ctx.fill();
+			}
+
+			function checkScratchCompletion() {
+				const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+				let count = 0;
+				for (let i = 0; i < pixels.length; i += 4) {
+					if (pixels[i + 3] === 0) {
+						count++;
+					}
+				}
+				if (count / (canvas.width * canvas.height) > 0.5) {
+					canvas.style.display = 'none';
+				}
+			}
+
+			canvas.addEventListener('mousedown', startScratch);
+			canvas.addEventListener('mousemove', scratch);
+			canvas.addEventListener('mouseup', stopScratch);
+			canvas.addEventListener('mouseleave', stopScratch);
+			window.addEventListener('load', resizeCanvas);
+		</script>
+	</body>
 </html>
